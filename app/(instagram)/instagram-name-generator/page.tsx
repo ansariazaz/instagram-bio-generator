@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/Loader";
 import MobileView from "@/components/MobileView";
 import { useState } from "react";
 
@@ -208,6 +209,7 @@ const data: CategoryData = {
 const page = () => {
   const [category, setCategory] = useState<string>("");
   const [keyword, setKeyword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const [usernames, setUsernames] = useState<string[]>([]);
   const [name, setName] = useState<string>("");
 
@@ -221,16 +223,19 @@ const page = () => {
 
   const generateUsernames = () => {
     if (!category || !keyword) return;
-
-    const keywords = data[category];
-    const results: string[] = [];
-    console.log(keywords, "keywords");
-    keywords.forEach((term) => {
-      results.push(`${keyword}${term}`);
-      results.push(`${term}${keyword}`);
-    });
-    console.log(results, "result");
-    setUsernames(results);
+    setLoading(true);
+    setTimeout(() => {
+      const keywords = data[category];
+      const results: string[] = [];
+      console.log(keywords, "keywords");
+      keywords.forEach((term) => {
+        results.push(`${keyword}${term}`);
+        results.push(`${term}${keyword}`);
+      });
+      console.log(results, "result");
+      setUsernames(results);
+      setLoading(false);
+    }, 1000);
   };
 
   const handleNameClick = (name: any) => {
@@ -299,8 +304,10 @@ const page = () => {
           >
             Generate Usernames
           </button>
-
-          {usernames.length > 0 && (
+          {loading ? (
+            <Loader />
+          ) : (
+          usernames.length > 0 && (
             <div className="mt-6">
               <h3 className="text-xl font-medium text-gray-800">
                 Suggested Usernames:
@@ -325,7 +332,7 @@ const page = () => {
                 </ul>
               </div>
             </div>
-          )}
+          ))}
         </div>
         <div className="w-full flex justify-center">
           <MobileView name={name} />

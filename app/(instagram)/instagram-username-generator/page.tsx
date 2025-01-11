@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/Loader";
 import MobileView from "@/components/MobileView";
 import { useState } from "react";
 
@@ -208,6 +209,7 @@ const data: CategoryData = {
 const page = () => {
   const [category, setCategory] = useState<string>("");
   const [keyword, setKeyword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
   const [usernames, setUsernames] = useState<string[]>([]);
   const [username, setUsername] = useState<string>("");
 
@@ -221,16 +223,19 @@ const page = () => {
 
   const generateUsernames = () => {
     if (!category || !keyword) return;
-
-    const keywords = data[category];
-    const results: string[] = [];
-    console.log(keywords, "keywords");
-    keywords.forEach((term) => {
-      results.push(`${keyword}${term}`);
-      results.push(`${term}${keyword}`);
-    });
-    console.log(results, "result");
-    setUsernames(results);
+    setLoading(true);
+    setTimeout(() => {
+      const keywords = data[category];
+      const results: string[] = [];
+      console.log(keywords, "keywords");
+      keywords.forEach((term) => {
+        results.push(`${keyword}${term}`);
+        results.push(`${term}${keyword}`);
+      });
+      console.log(results, "result");
+      setUsernames(results);
+      setLoading(false);
+    }, 1000);
   };
 
   const handleUsernameClick = (name: any) => {
@@ -299,32 +304,35 @@ const page = () => {
           >
             Generate Usernames
           </button>
-
-          {usernames.length > 0 && (
-            <div className="mt-6">
-              <h3 className="text-xl font-medium text-gray-800">
-                Suggested Usernames:
-              </h3>
-              <div className="mt-4 h-[300px] w-full max-w-md border rounded-lg bg-white overflow-y-auto">
-                <ul className="space-y-2 p-2">
-                  {usernames.map((name, index) => (
-                    <li
-                      key={index}
-                      className="p-2 border rounded-lg bg-gray-50 cursor-pointer hover:bg-indigo-600 hover:text-white flex justify-between items-center"
-                      onClick={() => handleUsernameClick(name)}
-                    >
-                      <span>{name}</span>
-                      <span
-                        className="bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-blue-600"
-                        onClick={handleCopyBio}
+          {loading ? (
+            <Loader />
+          ) : (
+            usernames.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-xl font-medium text-gray-800">
+                  Suggested Usernames:
+                </h3>
+                <div className="mt-4 h-[300px] w-full max-w-md border rounded-lg bg-white overflow-y-auto">
+                  <ul className="space-y-2 p-2">
+                    {usernames.map((name, index) => (
+                      <li
+                        key={index}
+                        className="p-2 border rounded-lg bg-gray-50 cursor-pointer hover:bg-indigo-600 hover:text-white flex justify-between items-center"
+                        onClick={() => handleUsernameClick(name)}
                       >
-                        Copy
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                        <span>{name}</span>
+                        <span
+                          className="bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-blue-600"
+                          onClick={handleCopyBio}
+                        >
+                          Copy
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
+            )
           )}
         </div>
         <div className="w-full flex justify-center">

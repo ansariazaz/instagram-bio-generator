@@ -302,7 +302,7 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
           </div>
         ))}
       </section>
-      <section className="w-[350px] fixed bottom-[90px] flex justify-around items-center bg-white shadow p-2 border-t rounded-bl-[44px] rounded-br-[40px]">
+      <section className="w-[350px] sticky bottom-0 flex justify-around items-center bg-white shadow p-2 border-t rounded-bl-[44px] rounded-br-[40px]">
         {bottomBarButtons.map((btn, idx) => (
           <img
             key={idx}

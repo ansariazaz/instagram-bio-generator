@@ -3,7 +3,7 @@ import { useState } from "react";
 import MobileView from "@/components/MobileView";
 import Loader from "@/components/Loader";
 import { bioData } from "@/data";
-const InstagramBioGenerator = () => {
+const page = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>("");
     const [bios, setBios] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -111,4 +111,4 @@ const InstagramBioGenerator = () => {
   );
 };
 
-export default InstagramBioGenerator;
+export default page;
