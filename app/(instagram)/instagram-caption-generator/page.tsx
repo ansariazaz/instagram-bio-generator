@@ -79,7 +79,7 @@ const page = () => {
                 <h3 className="text-xl font-medium text-gray-800">
                   Suggested Captions:
                 </h3>
-                <div className="mt-4 h-[300px] w-full max-w-md border rounded-lg bg-white overflow-y-auto">
+                <div className="mt-4 h-[300px] w-full border rounded-lg bg-white overflow-y-auto">
                   <ul className="space-y-2 p-2">
                     {captions.map((caption, index) => (
                       <li
