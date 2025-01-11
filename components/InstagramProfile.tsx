@@ -26,9 +26,12 @@ interface BottomBarButton {
 
 interface InstagramProfileProps {
   selectedBio: string;
+  username:string;
+  name:string;
+  selectedCaption:string
 }
 
-const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,username, name }) => {
+const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,username, name, selectedCaption }) => {
   const stories: Story[] = [
     {
       img: "https://images.unsplash.com/photo-1431512284068-4c4002298068?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=416&h=312&q=60",
@@ -256,6 +259,7 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
         >
           www.antibullyingpro.com/resources
         </a>
+        <p>{selectedCaption && `#${selectedCaption}`}</p>
       </section>
 
       <section className="px-4 py-2 flex space-x-2">
