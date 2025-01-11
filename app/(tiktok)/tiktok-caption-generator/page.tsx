@@ -1,4 +1,5 @@
 "use client";
+import Loader from "@/components/Loader";
 import MobileView from "@/components/MobileView";
 import { useState } from "react";
 
@@ -20,22 +21,27 @@ const emojis = ["❤️", "🌟", "✨", "🌈", "🌸", "🌻", "😎", "💫",
 const page = () => {
   const [keyword, setKeyword] = useState<string>("");
   const [captions, setCaptions] = useState<string[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
   const [selectedCaption, setSelectedCaption] = useState<string>("");
 
   const generateCaptions = () => {
     if (!keyword.trim()) return;
+    setLoading(true)
+    setTimeout(() => {
+        const newCaptions = templates.map((template) =>
+        template.replace("{keyword}", keyword)
+      );
+  
+      const randomEmojis = new Array(5)
+        .fill(null)
+        .map(() => emojis[Math.floor(Math.random() * emojis.length)]);
+  
+      const emojiCaptions = randomEmojis.map((emoji) => `${keyword} ${emoji}`);
+  
+      setCaptions([...newCaptions, ...emojiCaptions]);
+      setLoading(false)
+    }, 1000);
 
-    const newCaptions = templates.map((template) =>
-      template.replace("{keyword}", keyword)
-    );
-
-    const randomEmojis = new Array(5)
-      .fill(null)
-      .map(() => emojis[Math.floor(Math.random() * emojis.length)]);
-
-    const emojiCaptions = randomEmojis.map((emoji) => `${keyword} ${emoji}`);
-
-    setCaptions([...newCaptions, ...emojiCaptions]);
   };
 
   const handleCaptionClick = (caption: string) => {
@@ -56,7 +62,7 @@ const page = () => {
       <p className="text-lg text-gray-600 text-center mt-4">
         Create a professional, eye-catching tiktok caption in seconds
       </p>
-      <div className="flex flex-col md:flex-row max-w-6xl mx-auto mt-10 gap-10 justify-center">
+      <div className="flex flex-col md:flex-row max-w-6xl mx-auto mt-10 gap-10 justify-center px-2">
         <div className="w-full mt-6 space-y-4">
           <div className="w-full">
             <input
@@ -73,8 +79,10 @@ const page = () => {
               Generate Captions
             </button>
           </div>
-          <div className="w-full">
-            {captions.length > 0 && (
+          {loading ? (
+            <Loader />
+          ) : (
+            captions.length > 0 && (
               <div className="mt-6">
                 <h3 className="text-xl font-medium text-gray-800">
                   Suggested Captions:
@@ -99,8 +107,9 @@ const page = () => {
                   </ul>
                 </div>
               </div>
-            )}
-          </div>
+            )
+          )}
+         
         </div>
 
         <div className="w-full flex justify-center">

@@ -31,14 +31,14 @@ const page = () => {
       }, 1000);
     };
   return (
-    <div>
+    <>
       <h1 className="text-4xl text-indigo-600 text-center mt-8 font-bold">
         Instagram Bio Generator
       </h1>
       <p className="text-lg text-gray-600 text-center mt-4">
         Create a professional, eye-catching Instagram bio in seconds
       </p>
-      <div className="flex flex-col md:flex-row max-w-6xl mx-auto mt-10 gap-10 justify-center">
+      <div className="flex flex-col md:flex-row max-w-6xl mx-auto mt-10 gap-10 justify-center px-2">
         <div className="w-full">
           <div className=" w-full">
             <label
@@ -107,7 +107,7 @@ const page = () => {
           <MobileView selectedBio={selectedBio} />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
