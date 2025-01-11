@@ -13,6 +13,36 @@ const tools = [
     description: "Generate creative Instagram username effortlessly.",
     href: "/instagram-username-generator",
   },
+  {
+    name: "Instagram Name Generator",
+    description: "Generate creative Instagram name effortlessly.",
+    href: "/instagram-name-generator",
+  },
+  {
+    name: "Instagram Caption Generator",
+    description: "Generate creative Instagram caption effortlessly.",
+    href: "/instagram-caption-generator",
+  },
+  {
+    name: "Facebook Bio Generator",
+    description: "Generate creative Facebook bio effortlessly.",
+    href: "/facebook-bio-generator",
+  },
+  {
+    name: "Twitter Bio Generator",
+    description: "Generate creative Twitter bio effortlessly.",
+    href: "/twitter-bio-generator",
+  },
+  {
+    name: "Tiktok Bio Generator",
+    description: "Generate creative Tiktok bio effortlessly.",
+    href: "/tiktok-bio-generator",
+  },
+  {
+    name: "Tiktok Caption Generator",
+    description: "Generate creative Tiktok caption effortlessly.",
+    href: "/tiktok-caption-generator",
+  },
 ];
 
 export default function Home() {

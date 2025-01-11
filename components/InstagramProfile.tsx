@@ -28,7 +28,7 @@ interface InstagramProfileProps {
   selectedBio: string;
 }
 
-const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio }) => {
+const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,username }) => {
   const stories: Story[] = [
     {
       img: "https://images.unsplash.com/photo-1431512284068-4c4002298068?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=416&h=312&q=60",
@@ -210,10 +210,10 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio }) => {
 
   return (
     <div className="max-w-[350px] rounded-lg z-10">
-      <section className="flex justify-between items-center p-4 border-b mt-4">
+      <section className="flex justify-between items-center pt-8 px-4 border-b mt-4">
         <Image src={back} alt="Back" className="w-6" />
         <div className="flex items-center">
-          <h1 className="text-lg font-bold">instagram</h1>
+          <h1 className="text-lg font-bold">{username ? username : "Instagram"}</h1>
           <img
             src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/kisspng-social-media-instagram-verified-badge-symbol-compu-5b1eedb5aba638.1612204615287535897031.jpg"
             alt="verified"

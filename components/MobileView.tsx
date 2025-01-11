@@ -7,11 +7,11 @@ interface MobileViewProps {
   selectedBio: string;
 }
 
-const MobileView: React.FC<MobileViewProps> = ({ selectedBio }) => {
+const MobileView: React.FC<MobileViewProps> = ({ selectedBio,username }) => {
   return (
     <div className="phone-container">
       <Image src={iphone} alt="iPhone mockup" className="iphone absolute z-2 pointer-events-none" />
-      <InstagramProfile selectedBio={selectedBio} />
+      <InstagramProfile selectedBio={selectedBio} username={username} />
     </div>
   );
 };
