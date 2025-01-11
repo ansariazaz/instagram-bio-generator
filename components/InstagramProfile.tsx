@@ -25,10 +25,10 @@ interface BottomBarButton {
 }
 
 interface InstagramProfileProps {
-  selectedBio: string;
-  username:string;
-  name:string;
-  selectedCaption:string
+  selectedBio?: string;
+  username?:string;
+  name?:string;
+  selectedCaption?:string
 }
 
 const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,username, name, selectedCaption }) => {
@@ -217,9 +217,11 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
         <Image src={back} alt="Back" className="w-6" />
         <div className="flex items-center">
           <h1 className="text-lg font-bold">{username ? username : "Instagram"}</h1>
-          <img
+          <Image
             src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/kisspng-social-media-instagram-verified-badge-symbol-compu-5b1eedb5aba638.1612204615287535897031.jpg"
             alt="verified"
+            width={20}
+            height={20}
             className="w-4 ml-2"
           />
         </div>
@@ -285,7 +287,7 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
       <section className="grid grid-cols-4 gap-1 border-t">
         {tabs.map((tab, idx) => (
           <button key={idx} className="p-2">
-            <img src={tab.icon} alt={tab.alt} className="mx-auto w-6" />
+            <Image src={tab.icon} alt={tab.alt} width={20} height={20} className="mx-auto" />
           </button>
         ))}
       </section>
@@ -297,18 +299,18 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
               src={image.img}
               alt={image.alt}
               layout="fill"
-              objectFit="cover"
             />
           </div>
         ))}
       </section>
       <section className="w-[350px] sticky bottom-0 flex justify-around items-center bg-white shadow p-2 border-t rounded-bl-[44px] rounded-br-[40px]">
         {bottomBarButtons.map((btn, idx) => (
-          <img
+          <Image
             key={idx}
             src={btn.icon}
             alt={btn.alt}
-            className={`w-6 ${btn.active ? "opacity-100" : "opacity-50"}`}
+            width={20}
+            height={20}
           />
         ))}
       </section>

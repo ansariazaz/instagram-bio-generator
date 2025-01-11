@@ -4,13 +4,13 @@ import iphone from "@/assets/phone.png";
 import InstagramProfile from "@/components/InstagramProfile";
 
 interface MobileViewProps {
-  selectedBio: string;
-  username:string;
-  name:string;
-  selectedCaption:string
+  selectedBio?: string;
+  username?:string;
+  name?:string;
+  selectedCaption?:string
 }
 
-const MobileView: React.FC<MobileViewProps> = ({ selectedBio,username,name, selectedCaption }) => {
+const MobileView: React.FC<MobileViewProps> = ({ selectedBio,username,name,selectedCaption }) => {
   return (
     <div className="phone-container">
       <Image src={iphone} alt="iPhone mockup" className="iphone absolute z-2 pointer-events-none" />
