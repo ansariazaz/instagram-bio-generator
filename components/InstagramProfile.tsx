@@ -28,7 +28,7 @@ interface InstagramProfileProps {
   selectedBio: string;
 }
 
-const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,username }) => {
+const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,username, name }) => {
   const stories: Story[] = [
     {
       img: "https://images.unsplash.com/photo-1431512284068-4c4002298068?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=416&h=312&q=60",
@@ -248,7 +248,7 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
       </section>
 
       <section className="px-4 py-2">
-        <h2 className="text-lg font-semibold">Instagram</h2>
+        <h2 className="text-lg font-semibold">{name ? name : "Instagram"}</h2>
         <p className="text-gray-600">{selectedBio}</p>
         <a
           href="https://www.antibullyingpro.com/resources"
