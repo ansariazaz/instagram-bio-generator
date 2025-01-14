@@ -4,7 +4,7 @@ import Link from "next/link";
 import logo from "@/assets/logo2.svg";
 const Footer: React.FC = () => {
   return (
-    <div className="fixed bottom-0 w-full">
+    <div className="w-full">
       <footer className="flex flex-col justify-between bg-blue-200 text-blue-800 py-10">
         <div className="flex justify-center gap-32">
           <div>
