@@ -10,7 +10,7 @@ const Footer: React.FC = () => {
         <div className="container mx-auto flex flex-col md:flex-row justify-between md:items-center px-4">
           {/* Logo Section */}
           <div className="mb-6 md:mb-0">
-            <Link href="/">
+            <Link href="https://socialmediatalky.com/">
               <Image
                 src={logo}
                 alt="Logo"
@@ -26,15 +26,15 @@ const Footer: React.FC = () => {
             <h4 className="text-lg font-medium mb-4 text-gray-800">Tools</h4>
             <ul className="space-y-2">
               {[
-                { href: "/instagram-bio-generator", label: "Instagram Bio Generator" },
-                { href: "/instagram-username-generator", label: "Instagram Username Generator" },
-                { href: "/instagram-name-generator", label: "Instagram Name Generator" },
-                { href: "/instagram-caption-generator", label: "Instagram Caption Generator" },
+                { href: "/tools/instagram-bio-generator", label: "Instagram Bio Generator" },
+                { href: "/tools/instagram-username-generator", label: "Instagram Username Generator" },
+                { href: "/tools/instagram-name-generator", label: "Instagram Name Generator" },
+                { href: "/tools/instagram-caption-generator", label: "Instagram Caption Generator" },
               ].map((tool) => (
                 <li key={tool.href}>
                   <Link
                     href={tool.href}
-                    className="text-gray-800 hover:bg-gray-100 py-1 rounded-md transition-colors duration-300"
+                    className="text-gray-800 hover:bg-gray-100 px-2 py-1 rounded-md transition-colors duration-300"
                   >
                     {tool.label}
                   </Link>
@@ -47,13 +47,13 @@ const Footer: React.FC = () => {
           <div>
             <a
               href="https://socialmediatalky.com/contact/"
-              className="text-gray-800 font-medium block mb-2 hover:bg-gray-100 rounded-md transition-colors duration-300"
+              className="text-gray-800 font-medium block mb-2 px-2 hover:bg-gray-100 rounded-md transition-colors duration-300"
             >
               Contact Us
             </a>
             <a
               href="https://socialmediatalky.com/privacy-policy/"
-              className="text-gray-800 font-medium block hover:bg-gray-100 rounded-md transition-colors duration-300"
+              className="text-gray-800 font-medium block px-2 hover:bg-gray-100 rounded-md transition-colors duration-300"
             >
               Privacy & Policy
             </a>
