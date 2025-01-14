@@ -11,8 +11,8 @@ const interFont = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Bio Generator",
-  description: "Instagram Bio Generator",
+  title: "Social media tools",
+  description: "Social media tools",
   icons: {
     icon: ["/favicon.ico?v=4"],
   },
