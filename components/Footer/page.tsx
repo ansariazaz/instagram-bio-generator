@@ -2,80 +2,69 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import logo from "@/assets/logo2.svg";
+
 const Footer: React.FC = () => {
   return (
-    <div className="w-full">
-      <footer className="flex flex-col justify-between bg-blue-200 text-blue-800 py-10">
-        <div className="flex justify-center gap-32">
-          <div>
-            <div className="mb-4">
+    <div className="w-full ">
+      <footer className="bg-white border-t border-gray-200 py-10 shadow-sm mt-10">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+          {/* Logo Section */}
+          <div className="mb-6 md:mb-0">
+            <Link href="/">
               <Image
                 src={logo}
                 alt="Logo"
-                width={240}
-                height={80}
-                className="w-full h-auto"
+                width={200}
+                height={150}
+                className="transition-transform duration-300 hover:scale-110"
               />
-            </div>
+            </Link>
           </div>
-          <div>
-            <h4 className="text-lg font-medium mb-4">Tools</h4>
+
+          {/* Tools Section */}
+          <div className="mb-6 md:mb-0">
+            <h4 className="text-lg font-medium mb-4 text-gray-800">Tools</h4>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/instagram-bio-generator"
-                  className="hover:text-slate-600"
-                >
-                  Instagram-bio-generator
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/instagram-username-generator"
-                  className="hover:text-slate-600"
-                >
-                  Instagram Username Generator
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/instagram-name-generator"
-                  className="hover:text-slate-600"
-                >
-                  Instagram Name Generator
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/instagram-caption-generator"
-                  className="hover:text-slate-600"
-                >
-                  Instagram Caption Generator
-                </Link>
-              </li>
+              {[
+                { href: "/instagram-bio-generator", label: "Instagram Bio Generator" },
+                { href: "/instagram-username-generator", label: "Instagram Username Generator" },
+                { href: "/instagram-name-generator", label: "Instagram Name Generator" },
+                { href: "/instagram-caption-generator", label: "Instagram Caption Generator" },
+              ].map((tool) => (
+                <li key={tool.href}>
+                  <Link
+                    href={tool.href}
+                    className="text-gray-800 hover:bg-gray-100 py-1 rounded-md transition-colors duration-300"
+                  >
+                    {tool.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
+          {/* Contact Section */}
           <div>
             <a
               href="https://socialmediatalky.com/contact/"
-              className="text-lg font-medium mb-4 hover:text-slate-600"
+              className="text-gray-800 font-medium block mb-2 hover:bg-gray-100 px-3 py-1 rounded-md transition-colors duration-300"
             >
               Contact Us
             </a>
-            <div className="mt-2">
-              <a
-                href="https://socialmediatalky.com/privacy-policy/"
-                className="text-lg font-medium mb-4 hover:text-slate-600"
-              >
-                Privacy & Policy
-              </a>
-            </div>
+            <a
+              href="https://socialmediatalky.com/privacy-policy/"
+              className="text-gray-800 font-medium block hover:bg-gray-100 px-3 py-1 rounded-md transition-colors duration-300"
+            >
+              Privacy & Policy
+            </a>
           </div>
         </div>
       </footer>
+
       <div className="bg-gray-900 text-white py-4 text-center">
-        <p>© Copyright Socialmediatalky 2025.</p>
+        <p className="transition-opacity duration-300 hover:opacity-80">
+          © Copyright Socialmediatalky 2025.
+        </p>
       </div>
     </div>
   );

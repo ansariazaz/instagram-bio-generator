@@ -49,8 +49,8 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6">
-      <h1 className="text-4xl font-bold mb-8 text-gray-800">Toolbox</h1>
+    <div className="min-h-screen bg-gray-50 flex flex-col items-center p-6 pt-10">
+      <h1 className="text-4xl font-bold mb-8 text-gray-800">Social media Toolbox</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-4xl">
         {tools.map((tool) => (
           <div
