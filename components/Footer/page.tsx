@@ -7,21 +7,16 @@ const Footer: React.FC = () => {
     <>
       <footer className="flex flex-col justify-between bg-blue-200 text-blue-800 py-10">
         <div className="flex justify-center gap-32">
-          {/* Left Section */}
           <div>
-            <h3 className="text-lg font-medium mb-4">About Company</h3>
             <div className="mb-4">
               <Image
-                src={logo} // Replace with the correct path for your image
+                src={logo}
                 alt="Logo"
                 width={240}
                 height={80}
                 className="w-full h-auto"
               />
             </div>
-            <p className="text-sm font-light leading-relaxed">
-              © Copyright Socialmediatalky 2025
-            </p>
           </div>
           <div>
             <h4 className="text-lg font-medium mb-4">Tools</h4>
@@ -29,7 +24,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="/instagram-bio-generator"
-                  className="hover:text-white"
+                  className="hover:text-slate-600"
                 >
                   Instagram-bio-generator
                 </Link>
@@ -37,7 +32,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="/instagram-username-generator"
-                  className="hover:text-white"
+                  className="hover:text-slate-600"
                 >
                   Instagram Username Generator
                 </Link>
@@ -45,7 +40,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="/instagram-name-generator"
-                  className="hover:text-white"
+                  className="hover:text-slate-600"
                 >
                   Instagram Name Generator
                 </Link>
@@ -53,7 +48,7 @@ const Footer: React.FC = () => {
               <li>
                 <Link
                   href="/instagram-caption-generator"
-                  className="hover:text-white"
+                  className="hover:text-slate-600"
                 >
                   Instagram Caption Generator
                 </Link>
@@ -64,15 +59,23 @@ const Footer: React.FC = () => {
           <div>
             <a
               href="https://socialmediatalky.com/contact/"
-              className="text-lg font-medium mb-4"
+              className="text-lg font-medium mb-4 hover:text-slate-600"
             >
               Contact Us
             </a>
+            <div className="mt-2">
+              <a
+                href="https://socialmediatalky.com/privacy-policy/"
+                className="text-lg font-medium mb-4 hover:text-slate-600"
+              >
+                Privacy & Policy
+              </a>
+            </div>
           </div>
         </div>
       </footer>
       <div className="bg-gray-900 text-white py-4 text-center">
-        <p>Crafted with Care by XYZLab. All Rights Reserved.</p>
+        <p>© Copyright Socialmediatalky 2025.</p>
       </div>
     </>
   );

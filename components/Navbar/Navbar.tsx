@@ -29,18 +29,6 @@ const Navbar = () => {
           >
             Contact Us
           </Link>
-          <Link
-            href="https://socialmediatalky.com/privacy-policy/"
-            className="bg-blue-200 text-blue-800 font-medium px-4 py-2 rounded-full hover:bg-blue-300"
-          >
-            Privacy & Policy
-          </Link>
-          <Link
-            href="/"
-            className="bg-blue-200 text-blue-800 font-medium px-4 py-2 rounded-full hover:bg-blue-300"
-          >
-            Tools
-          </Link>
         </div>
       </div>
     </nav>
