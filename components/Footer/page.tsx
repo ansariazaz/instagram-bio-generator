@@ -5,9 +5,9 @@ import logo from "@/assets/logo2.svg";
 
 const Footer: React.FC = () => {
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <footer className="bg-white border-t border-gray-200 py-10 shadow-sm mt-10">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between md:items-center px-4">
           {/* Logo Section */}
           <div className="mb-6 md:mb-0">
             <Link href="/">
@@ -47,13 +47,13 @@ const Footer: React.FC = () => {
           <div>
             <a
               href="https://socialmediatalky.com/contact/"
-              className="text-gray-800 font-medium block mb-2 hover:bg-gray-100 px-3 py-1 rounded-md transition-colors duration-300"
+              className="text-gray-800 font-medium block mb-2 hover:bg-gray-100 rounded-md transition-colors duration-300"
             >
               Contact Us
             </a>
             <a
               href="https://socialmediatalky.com/privacy-policy/"
-              className="text-gray-800 font-medium block hover:bg-gray-100 px-3 py-1 rounded-md transition-colors duration-300"
+              className="text-gray-800 font-medium block hover:bg-gray-100 rounded-md transition-colors duration-300"
             >
               Privacy & Policy
             </a>

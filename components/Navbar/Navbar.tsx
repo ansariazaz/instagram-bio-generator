@@ -22,13 +22,13 @@ const Navbar = () => {
         <div className="flex space-x-6">
           <Link
             href="https://socialmediatalky.com/blog/"
-            className="text-gray-800 font-medium px-6 py-2 rounded-md hover:bg-gray-100 transition-colors duration-300"
+            className="text-gray-800 font-medium py-2 rounded-md hover:bg-gray-100 transition-colors duration-300"
           >
             Blog
           </Link>
           <Link
             href="https://socialmediatalky.com/contact/"
-            className="text-gray-800 font-medium px-6 py-2 rounded-md hover:bg-gray-100 transition-colors duration-300"
+            className="text-gray-800 font-medium py-2 rounded-md hover:bg-gray-100 transition-colors duration-300"
           >
             Contact Us
           </Link>
