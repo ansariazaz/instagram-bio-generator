@@ -12,7 +12,7 @@ const Navbar = () => {
           <Image
             src={logo}
             alt="logo"
-            width={180}
+            width={160}
             height={150}
             className="transition-transform duration-300 hover:scale-110"
           />
