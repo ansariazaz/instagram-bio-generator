@@ -3,6 +3,7 @@ import { useState } from "react";
 import MobileView from "@/components/MobileView";
 import Loader from "@/components/Loader";
 import data from "@/data/bio/data.json";
+import Head from "next/head";
 
 const page = () => {
   const [selectedGender, setSelectedGender] = useState<string>("girls");
@@ -46,6 +47,15 @@ const page = () => {
 
   return (
     <>
+      <Head>
+        <title>
+           Free Instagram Bio Generator - Copy and Paste Bios Easily
+        </title>
+        <meta
+          name="description"
+          content="Create the perfect Instagram bio with our free Instagram bio generator. Discover unique ideas and easily copy and paste your bios!"
+        />
+      </Head>
       <h1 className="text-4xl text-indigo-600 text-center mt-8 font-bold">
         Instagram Bio Generator
       </h1>
@@ -122,7 +132,7 @@ const page = () => {
                   >
                     <span>{bio}</span>
                     <p>
-                    <span
+                      <span
                         className="bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-blue-600 mr-4"
                         onClick={() => handleBioClick(bio)}
                       >
