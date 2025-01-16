@@ -2,7 +2,7 @@
 import { useState } from "react";
 import MobileView from "@/components/MobileView";
 import Loader from "@/components/Loader";
-import { bioData } from "@/data";
+import { bioData } from "@/data/name";
 const page = () => {
     const [selectedCategory, setSelectedCategory] = useState<string>("");
     const [bios, setBios] = useState<string[]>([]);
