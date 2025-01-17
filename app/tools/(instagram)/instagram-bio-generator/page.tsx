@@ -102,16 +102,16 @@ const page = () => {
           content="Create the perfect Instagram bio with our free Instagram bio generator. Discover unique ideas and easily copy and paste your bios!"
         />
       </Head>
-      <h1 className="text-4xl text-blue-600 text-center mt-10 font-bold">
+      <h1 className="text-4xl text-blue-600 text-center mt-10 font-bold max-w-3xl ml-auto mr-auto">
         Free Instagram Bio Generator: Copy and Paste Your Best Bio
       </h1>
-      <p className="text-lg text-gray-600 text-center mt-4">
+      <p className="text-lg text-gray-600 text-center mt-4 max-w-3xl ml-auto mr-auto">
         Discover the ultimate free Instagram bio generator. Create unique,
         stylish bios in seconds and copy and paste them directly to your profile
         for instant impact!
       </p>
-      <div className="flex flex-col md:flex-row max-w-6xl mx-auto mt-10 gap-10 justify-center px-2">
-        <div className="w-2/3 mt-8">
+      <div className="flex flex-col md:flex-row max-w-6xl mx-auto mt-10 gap-10 justify-between px-2">
+        <div className="mt-8">
           <div className="w-full">
             <div className="mb-4">
               <div>
@@ -196,7 +196,7 @@ const page = () => {
               ))}
             </ul>
           ) : (
-            <div className="w-full mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-24">
+            <div className="w-full mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-16">
               <div className="text-center py-12 text-gray-500 flex flex-col justify-center items-center">
                 <Image src={checklist} alt="checklist" width={100} height={100} />
                 <p className="text-xl font-medium mt-4">No bio generated yet</p>
@@ -207,7 +207,7 @@ const page = () => {
             </div>
           )}
         </div>
-        <div className="w-1/3 flex justify-center">
+        <div className="flex justify-center">
           <MobileView selectedBio={selectedBio} />
         </div>
       </div>
