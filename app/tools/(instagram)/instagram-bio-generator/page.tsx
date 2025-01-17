@@ -11,7 +11,15 @@ import Tips from "@/components/Section/Tips";
 import Instruction from "@/components/Section/Instruction";
 import Hero from "@/components/Section/Hero";
 import FAQPage from "@/components/Faq/Faq";
-import checklist from '@/assets/icons/checklist.png'
+import checklist from "@/assets/icons/checklist.png";
+import preview from "@/assets/icons/preview.svg";
+import copy from "@/assets/icons/copy.svg";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 const page = () => {
   const [selectedGender, setSelectedGender] = useState<string>("girls");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -126,7 +134,7 @@ const page = () => {
                   value="girls"
                   checked={selectedGender === "girls"}
                   onChange={handleGenderChange}
-                  className="form-radio h-5 w-5 text-blue-600"
+                  className="form-radio h-5 w-5 text-blue-600 cursor-pointer"
                 />
                 <span className="ml-2 text-gray-700">Girls</span>
               </label>
@@ -137,7 +145,7 @@ const page = () => {
                   value="boys"
                   checked={selectedGender === "boys"}
                   onChange={handleGenderChange}
-                  className="form-radio h-5 w-5 text-blue-600"
+                  className="form-radio h-5 w-5 text-blue-600 cursor-pointer"
                 />
                 <span className="ml-2 text-gray-700">Boys</span>
               </label>
@@ -152,7 +160,7 @@ const page = () => {
               id="category"
               value={selectedCategory}
               onChange={handleCategoryChange}
-              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600"
+              className="w-full mt-2 p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-600 cursor-pointer"
             >
               <option value="">-- Choose a Category --</option>
               {Object.keys(data[selectedGender]).map((category) => (
@@ -178,19 +186,40 @@ const page = () => {
                   className="p-4 border rounded-lg bg-white cursor-pointer hover:bg-blue-600 hover:text-white flex justify-between items-center"
                 >
                   <span>{bio}</span>
-                  <p>
-                    <span
-                      className="bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-blue-600 mr-4"
-                      onClick={() => handleBioClick(bio)}
-                    >
-                      Preview
-                    </span>
-                    <span
-                      className="bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-blue-600"
-                      onClick={handleCopyBio}
-                    >
-                      Copy
-                    </span>
+                  <p className="flex justify-center items-center">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Image
+                            alt="preview"
+                            src={preview}
+                            width={28}
+                            height={28}
+                            onClick={() => handleBioClick(bio)}
+                            className="mr-4"
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Preview Bio</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Image
+                            src={copy}
+                            alt="copy"
+                            width={28}
+                            height={28}
+                            onClick={handleCopyBio}
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Copy Bio</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </p>
                 </li>
               ))}
@@ -198,7 +227,12 @@ const page = () => {
           ) : (
             <div className="w-full mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-16">
               <div className="text-center py-12 text-gray-500 flex flex-col justify-center items-center">
-                <Image src={checklist} alt="checklist" width={100} height={100} />
+                <Image
+                  src={checklist}
+                  alt="checklist"
+                  width={100}
+                  height={100}
+                />
                 <p className="text-xl font-medium mt-4">No bio generated yet</p>
                 <p className="mt-2 text-sm">
                   Select options and click generate to see your bio
