@@ -19,7 +19,7 @@ body {
 }
 .phone-container {
   max-width: 350px;
-  height: 720px;
+  height: 712px;
   overflow: auto;
   border-radius: 60px;
   background-color: white;
@@ -32,4 +32,13 @@ body {
   position: absolute;
   z-index: 2;
   pointer-events: none;
+}
+.styles_faq-row__2YF3c{
+  margin-top: 20px;
+  padding: 12px 24px !important;
+  border-radius: 8px;
+  border: 1px solid #B1B1B1 !important;
+}
+html {
+  scroll-behavior: smooth;
 }
