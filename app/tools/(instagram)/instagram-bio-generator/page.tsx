@@ -45,9 +45,8 @@ const page = () => {
     setSelectedBio(bio);
   };
 
-  const handleCopyBio = (event: React.MouseEvent<HTMLSpanElement>) => {
-    event.stopPropagation();
-    navigator.clipboard.writeText(selectedBio);
+  const handleCopyBio = (bio:string) => {
+    navigator.clipboard.writeText(bio);
     toast({
       title: "Copied to clipboard!"
     })
@@ -217,7 +216,7 @@ const page = () => {
                             alt="copy"
                             width={28}
                             height={28}
-                            onClick={handleCopyBio}
+                            onClick={()=>handleCopyBio(bio)}
                           />
                         </TooltipTrigger>
                         <TooltipContent>

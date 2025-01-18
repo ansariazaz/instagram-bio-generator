@@ -262,8 +262,8 @@ const page = () => {
   const handleNameClick = (name: any) => {
     setName(name);
   };
-  const handleCopyName = (event: React.MouseEvent<HTMLSpanElement>) => {
-    event.stopPropagation();
+  const handleCopyName = (name:string) => {
+    setName(name)
     navigator.clipboard.writeText(name);
     toast({
       title: "Copied to clipboard!"
@@ -369,7 +369,7 @@ const page = () => {
                             alt="copy"
                             width={28}
                             height={28}
-                            onClick={handleCopyName}
+                            onClick={()=>handleCopyName(name)}
                           />
                         </TooltipTrigger>
                         <TooltipContent>

@@ -274,12 +274,19 @@ const page = () => {
   const handleUsernameClick = (name: any) => {
     setUsername(name);
   };
-  const handleCopyBio = (event: React.MouseEvent<HTMLSpanElement>) => {
-    event.stopPropagation();
-    navigator.clipboard.writeText(username);
-    toast({
-      title: "Copied to clipboard!"
-    })
+  const handleCopyBio = (name: string) => {
+    navigator.clipboard.writeText(name)
+      .then(() => {
+        toast({
+          title: "Copied to clipboard!",
+        });
+      })
+      .catch(() => {
+        toast({
+          title: "Failed to copy to clipboard.",
+          description: "Please try again.",
+        });
+      });
   };
 
   return (
@@ -380,7 +387,7 @@ const page = () => {
                                 alt="copy"
                                 width={28}
                                 height={28}
-                                onClick={handleCopyBio}
+                                onClick={()=>handleCopyBio(name)}
                               />
                             </TooltipTrigger>
                             <TooltipContent>
