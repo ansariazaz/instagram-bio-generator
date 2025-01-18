@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar"; // Import your Navbar component
 import Footer from "@/components/Footer/page";
-
+import { Toaster } from "@/components/ui/toaster"
 const interFont = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -49,6 +49,7 @@ export default function RootLayout({
           ></iframe>
         </noscript>
         <Navbar />
+        <Toaster />
         {children}
         <Footer />
       </body>

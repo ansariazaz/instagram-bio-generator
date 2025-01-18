@@ -13,6 +13,7 @@ import Hero from "@/components/Section/Hero";
 import FAQPage from "@/components/Faq/Faq";
 import checklist from "@/assets/icons/checklist.png";
 import preview from "@/assets/icons/preview.svg";
+import { useToast } from "@/hooks/use-toast"
 import copy from "@/assets/icons/copy.svg";
 import {
   Tooltip,
@@ -20,12 +21,14 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { Card } from "@/components/ui/card";
 const page = () => {
   const [selectedGender, setSelectedGender] = useState<string>("girls");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
   const [bios, setBios] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedBio, setSelectedBio] = useState<string>("");
+  const { toast } = useToast()
 
   const handleGenderChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedGender(event.target.value);
@@ -45,7 +48,9 @@ const page = () => {
   const handleCopyBio = (event: React.MouseEvent<HTMLSpanElement>) => {
     event.stopPropagation();
     navigator.clipboard.writeText(selectedBio);
-    alert("Bio copied to clipboard!");
+    toast({
+      title: "Copied to clipboard!"
+    })
   };
 
   const handleGenerateClick = () => {
@@ -225,20 +230,22 @@ const page = () => {
               ))}
             </ul>
           ) : (
-            <div className="w-full mx-auto bg-white shadow-md rounded-lg overflow-hidden mt-16">
-              <div className="text-center py-12 text-gray-500 flex flex-col justify-center items-center">
-                <Image
-                  src={checklist}
-                  alt="checklist"
-                  width={100}
-                  height={100}
-                />
-                <p className="text-xl font-medium mt-4">No bio generated yet</p>
-                <p className="mt-2 text-sm">
-                  Select options and click generate to see your bio
-                </p>
-              </div>
-            </div>
+            <Card className="mt-12">
+                <div className="text-center py-12 text-gray-500 flex flex-col justify-center items-center">
+                  <Image
+                    src={checklist}
+                    alt="checklist"
+                    width={100}
+                    height={100}
+                  />
+                  <p className="text-xl font-medium mt-4">
+                    No bio generated yet
+                  </p>
+                  <p className="mt-2 text-sm">
+                    Select options and click generate to see your bio
+                  </p>
+                </div>
+            </Card>
           )}
         </div>
         <div className="flex justify-center">
