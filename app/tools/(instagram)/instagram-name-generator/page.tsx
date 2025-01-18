@@ -1,7 +1,14 @@
 "use client";
 import Loader from "@/components/Loader";
 import MobileView from "@/components/MobileView";
+import { Card } from "@/components/ui/card";
+import Image from "next/image";
 import { useState } from "react";
+import checklist from "@/assets/icons/checklist.png";
+import preview from "@/assets/icons/preview.svg";
+import { useToast } from "@/hooks/use-toast"
+import copy from "@/assets/icons/copy.svg";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 
 interface CategoryData {
   [key: string]: string[];
@@ -212,7 +219,7 @@ const page = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [usernames, setUsernames] = useState<string[]>([]);
   const [name, setName] = useState<string>("");
-
+  const { toast } = useToast()
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategory(e.target.value);
   };
@@ -224,15 +231,29 @@ const page = () => {
   const generateUsernames = () => {
     if (!category || !keyword) return;
     setLoading(true);
+    const words = keyword.split(" ");
     setTimeout(() => {
       const keywords = data[category];
       const results: string[] = [];
-      console.log(keywords, "keywords");
       keywords.forEach((term) => {
-        results.push(`${keyword}${term}`);
-        results.push(`${term}${keyword}`);
+        results.push(
+          `${keyword}${term}`,
+          `the_${keyword}`,
+          `${keyword}_official`,
+          `real_${keyword}`,
+          `${keyword}_${term}`,
+          `${term}_${keyword}`,
+          `${keyword}The${term}`,
+          `iam_${keyword}_${term}`,
+          `${words[0]} ${words[words.length - 1]}`,
+          `${words[0]}.${words[words.length - 1]}`,
+          `${words[0]}_${words[words.length - 1]}`,
+          `${keyword} ✨`,
+          `✨ ${keyword}`,
+          `${keyword} 🌟`,
+          `${words[0]} the ${words[words.length - 1]}`
+        );
       });
-      console.log(results, "result");
       setUsernames(results);
       setLoading(false);
     }, 1000);
@@ -241,10 +262,12 @@ const page = () => {
   const handleNameClick = (name: any) => {
     setName(name);
   };
-  const handleCopyBio = (event: React.MouseEvent<HTMLSpanElement>) => {
-    event.stopPropagation();
+  const handleCopyName = (name:string) => {
+    setName(name)
     navigator.clipboard.writeText(name);
-    alert("username copied to clipboard!");
+    toast({
+      title: "Copied to clipboard!"
+    })
   };
 
   return (
@@ -256,11 +279,11 @@ const page = () => {
         Create a professional, eye-catching Instagram name in seconds
       </p>
       <div className="flex flex-col md:flex-row max-w-6xl mx-auto mt-10 gap-10 justify-center px-2">
-        <div className="w-full max-w-md space-y-4">
+        <div className="w-full max-w-md">
           <div>
             <label
               htmlFor="category"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-xl font-medium text-gray-700"
             >
               Select Category:
             </label>
@@ -281,10 +304,10 @@ const page = () => {
             </select>
           </div>
 
-          <div>
+          <div className="mt-4">
             <label
               htmlFor="keyword"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-xl font-medium text-gray-700"
             >
               Enter name:
             </label>
@@ -300,14 +323,13 @@ const page = () => {
 
           <button
             onClick={generateUsernames}
-            className="w-full py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none"
+            className="w-full py-2 bg-indigo-600 text-white font-semibold rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none mt-6"
           >
             Generate Usernames
           </button>
           {loading ? (
             <Loader />
-          ) : (
-          usernames.length > 0 && (
+          ) : usernames.length > 0 ? (
             <div className="mt-6">
               <h3 className="text-xl font-medium text-gray-800">
                 Suggested Usernames:
@@ -321,18 +343,62 @@ const page = () => {
                       onClick={() => handleNameClick(name)}
                     >
                       <span>{name}</span>
-                      <span
-                        className="bg-blue-500 text-white px-3 py-1 rounded-md cursor-pointer hover:bg-blue-600"
-                        onClick={handleCopyBio}
-                      >
-                        Copy
-                      </span>
+                      <p className="flex justify-center items-center">
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Image
+                            alt="preview"
+                            src={preview}
+                            width={28}
+                            height={28}
+                            onClick={() => handleNameClick(name)}
+                            className="mr-4"
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Preview Name</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger>
+                          <Image
+                            src={copy}
+                            alt="copy"
+                            width={28}
+                            height={28}
+                            onClick={()=>handleCopyName(name)}
+                          />
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Copy Name</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
+                  </p>
                     </li>
                   ))}
                 </ul>
               </div>
             </div>
-          ))}
+          ) : (
+            <Card className="mt-16">
+              <div className="text-center py-12 text-gray-500 flex flex-col justify-center items-center">
+                <Image
+                  src={checklist}
+                  alt="checklist"
+                  width={100}
+                  height={100}
+                />
+                <p className="text-xl font-medium mt-4">No Name generated yet</p>
+                <p className="mt-2 text-sm">
+                  Select options and click generate to see your username
+                </p>
+              </div>
+            </Card>
+          )}
         </div>
         <div className="w-full flex justify-center">
           <MobileView name={name} />

@@ -256,12 +256,12 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
         <h2 className="text-lg font-semibold">{name ? name : "Instagram"}</h2>
         <p className="text-gray-600">{selectedBio}</p>
         <a
-          href="https://www.antibullyingpro.com/resources"
+          href="https://socialmediatalky.com/tools"
           className="text-blue-500 text-sm"
         >
-          www.antibullyingpro.com/resources
+          www.socialmediatalky.com/tools
         </a>
-        <p>{selectedCaption && `#${selectedCaption}`}</p>
+        <p>{selectedCaption && selectedCaption}</p>
       </section>
 
       <section className="px-4 py-2 flex space-x-2">
