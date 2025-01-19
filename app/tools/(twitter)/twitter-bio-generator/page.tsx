@@ -104,7 +104,7 @@ const page = () => {
           )}
         </div>
         <div className="w-full flex justify-center">
-          <MobileView selectedBio={selectedBio} />
+          <MobileView selectedBio={selectedBio} platform="twitter" />
         </div>
       </div>
     </div>

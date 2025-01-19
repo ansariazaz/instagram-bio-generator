@@ -401,7 +401,7 @@ const page = () => {
           )}
         </div>
         <div className="w-full flex justify-center">
-          <MobileView name={name} />
+          <MobileView name={name} platform="instagram"/>
         </div>
       </div>
     </div>

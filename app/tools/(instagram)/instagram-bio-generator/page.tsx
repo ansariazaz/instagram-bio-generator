@@ -248,7 +248,7 @@ const page = () => {
           )}
         </div>
         <div className="flex justify-center">
-          <MobileView selectedBio={selectedBio} />
+          <MobileView selectedBio={selectedBio} platform="instagram" />
         </div>
       </div>
       <Hero />
