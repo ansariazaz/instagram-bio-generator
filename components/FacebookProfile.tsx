@@ -1,11 +1,16 @@
 import React from "react";
 import Image from "next/image";
-import coverPhoto from "@/assets/images/ai.png";
+import coverPhoto from "@/assets/images/cover.jpg";
 import profilePic from "@/assets/icons/facebook.svg";
 import avatar from "@/assets/avatar.png";
 import avatar1 from "@/assets/images/avatar1.png";
 import avatar2 from "@/assets/images/avatar2.png";
 import { Icon } from "@iconify/react";
+import more from "@/assets/more.svg";
+import back from "@/assets/back.svg";
+import notify from '@/assets/icons/notify.svg'
+import burger from '@/assets/icons/burger.svg'
+import people from '@/assets/icons/people.svg'
 
 interface FacebookProfileProps {
   profileName?: string;
@@ -80,6 +85,38 @@ const galleryImages: Gallery[] = [
     alt: "Image 15",
   },
 ];
+interface BottomBarButton {
+    icon: string;
+    alt: string;
+    active: boolean;
+  }
+const bottomBarButtons: BottomBarButton[] = [
+    {
+      icon: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/home-icon.png",
+      alt: "home icon",
+      active: false,
+    },
+    {
+      icon: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/profile-picture.png",
+      alt: "search icon",
+      active: true,
+    },
+    {
+      icon: people,
+      alt: "add icon",
+      active: false,
+    },
+    {
+      icon:notify,
+      alt: "heart icon",
+      active: false,
+    },
+    {
+      icon:burger,
+      alt: "profile picture",
+      active: false,
+    },
+  ];
 const FacebookProfile: React.FC<FacebookProfileProps> = ({
   profileName = "John Doe",
   profileBio = "Living life to the fullest.",
@@ -88,7 +125,14 @@ const FacebookProfile: React.FC<FacebookProfileProps> = ({
   photosCount = 120,
 }) => {
   return (
-    <div className="max-w-[600px] mx-auto rounded-lg shadow-md border bg-white">
+    <div className="max-w-[600px] mx-auto rounded-lg shadow-md border bg-white px-2">
+      <section className="flex justify-between items-center pt-8 px-4 border-b mt-4">
+        <Image src={back} alt="Back" className="w-6" />
+        <div className="flex items-center">
+          <h1 className="text-lg font-bold">John Doe</h1>
+        </div>
+        <Image src={more} alt="More" className="w-6" />
+      </section>
       <div className="relative">
         <Image
           src={coverPhoto}
@@ -144,7 +188,7 @@ const FacebookProfile: React.FC<FacebookProfileProps> = ({
       </div>
       <div className="border-t">
         <h2 className="text-lg font-semibold ml-4 mt-4">Recent Photos</h2>
-        <section className="grid grid-cols-3 px-2 gap-[1px] mt-4">
+        <section className="grid grid-cols-3 gap-[1px] mt-4">
           {galleryImages.map((image, index) => (
             <div key={index} className="relative w-full h-24">
               <Image src={image.img} alt={image.alt} layout="fill" />
@@ -187,6 +231,17 @@ const FacebookProfile: React.FC<FacebookProfileProps> = ({
           </div>
         </div>
       </div>
+      <section className="w-[350px] sticky bottom-0 flex justify-around items-center bg-white shadow p-2 border-t rounded-bl-[44px] rounded-br-[40px]">
+        {bottomBarButtons.map((btn, idx) => (
+          <Image
+            key={idx}
+            src={btn.icon}
+            alt={btn.alt}
+            width={20}
+            height={20}
+          />
+        ))}
+      </section>
     </div>
   );
 };

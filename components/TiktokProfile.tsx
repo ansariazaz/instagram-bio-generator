@@ -1,6 +1,4 @@
 import Image from "next/image";
-import more from "@/assets/more.svg";
-import back from "@/assets/back.svg";
 import tiktok from "@/assets/icons/tiktok.svg";
 import photo from "@/assets/images/photo.jpeg";
 import photo1 from "@/assets/images/photo1.jpeg";
@@ -8,9 +6,47 @@ import photo2 from "@/assets/images/photo2.jpeg";
 import photo3 from "@/assets/images/photo3.jpeg";
 import photo4 from "@/assets/images/photo4.jpeg";
 import photo5 from "@/assets/images/photo5.jpeg";
+import more from "@/assets/more.svg";
+import back from "@/assets/back.svg";
+import notify from '@/assets/icons/notify.svg'
+import burger from '@/assets/icons/burger.svg'
+import people from '@/assets/icons/people.svg'
+import video from '@/assets/icons/video.svg'
 export default function TiktokProfile() {
+    interface BottomBarButton {
+        icon: string;
+        alt: string;
+        active: boolean;
+      }
+    const bottomBarButtons: BottomBarButton[] = [
+        {
+          icon: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/home-icon.png",
+          alt: "home icon",
+          active: false,
+        },
+        {
+          icon: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/search-icon.png",
+          alt: "search icon",
+          active: true,
+        },
+        {
+          icon: video,
+          alt: "add icon",
+          active: false,
+        },
+        {
+          icon:notify,
+          alt: "heart icon",
+          active: false,
+        },
+        {
+          icon:"https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/profile-picture.png",
+          alt: "profile picture",
+          active: false,
+        },
+      ];
   return (
-    <div className="bg-white min-h-screen text-gray-900">
+    <div className="bg-white text-gray-900">
       <section className="flex justify-between items-center pt-8 px-4 border-b mt-4">
         <Image src={back} alt="Back" className="w-6" />
         <div className="flex items-center">
@@ -95,6 +131,17 @@ export default function TiktokProfile() {
           </div>
         ))}
       </div>
+      <section className="w-[350px] sticky bottom-0 flex justify-around items-center bg-white shadow p-2 border-t rounded-bl-[44px] rounded-br-[40px]">
+        {bottomBarButtons.map((btn, idx) => (
+          <Image
+            key={idx}
+            src={btn.icon}
+            alt={btn.alt}
+            width={20}
+            height={20}
+          />
+        ))}
+      </section>
     </div>
   );
 }
