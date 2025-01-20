@@ -21,14 +21,15 @@ interface TwitterProfileProps {
   tweetsCount?: number;
   followersCount?: string;
   followingCount?: number;
+  selectedBio?:string
 }
 
 const TwitterProfile: React.FC<TwitterProfileProps> = ({
+  selectedBio,
   profileName = "yourname",
   username = "@yourname",
-  bio = "Type your description here. Add your links in this color twitter.com/yourname and write about yourself.",
-  website = "yourwebsite.com",
-  location = "Your location",
+  website = "https://socialmediatalky.com/tools",
+  location = "Bengalore, India",
   joinDate = "Joined July 2022",
   tweetsCount = 0,
   followersCount = "48K",
@@ -84,7 +85,7 @@ const TwitterProfile: React.FC<TwitterProfileProps> = ({
       <div className="pt-16 px-4 text-left">
         <h1 className="text-xl font-bold">{profileName}</h1>
         <p className="text-gray-500">{username}</p>
-        <p className="text-gray-600 mt-2">{bio}</p>
+        <p className="text-gray-600 mt-2">{selectedBio ? selectedBio :"Type your description here"}</p>
         <p className="text-blue-500 mt-1">{website}</p>
         <p className="text-gray-500">📍 {location}</p>
         <p className="text-gray-500">📅 {joinDate}</p>

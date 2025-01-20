@@ -18,6 +18,7 @@ interface FacebookProfileProps {
   profilePosts?: number;
   friendsCount?: number;
   photosCount?: number;
+  selectedBio?:string
 }
 interface Gallery {
   img: string;
@@ -118,11 +119,12 @@ const bottomBarButtons: BottomBarButton[] = [
     },
   ];
 const FacebookProfile: React.FC<FacebookProfileProps> = ({
+  selectedBio,
   profileName = "John Doe",
   profileBio = "Living life to the fullest.",
   profilePosts = 230,
   friendsCount = 500,
-  photosCount = 120,
+  photosCount = 120
 }) => {
   return (
     <div className="max-w-[600px] mx-auto rounded-lg shadow-md border bg-white px-2">
@@ -151,7 +153,7 @@ const FacebookProfile: React.FC<FacebookProfileProps> = ({
       </div>
       <div className="pt-12 px-4 text-center">
         <h1 className="text-2xl font-bold">{profileName}</h1>
-        <p className="text-gray-600">{profileBio}</p>
+        <p className="text-gray-600">{selectedBio ? selectedBio:profileBio}</p>
       </div>
       <div className="flex justify-around py-4 border-t">
         <div className="text-center">
