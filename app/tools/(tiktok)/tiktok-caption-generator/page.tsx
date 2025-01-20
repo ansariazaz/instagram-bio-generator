@@ -113,7 +113,7 @@ const page = () => {
         </div>
 
         <div className="w-full flex justify-center">
-          <MobileView selectedCaption={selectedCaption} />
+          <MobileView selectedCaption={selectedCaption} platform="tiktok" />
         </div>
       </div>
     </div>

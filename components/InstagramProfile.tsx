@@ -3,7 +3,7 @@ import Image from "next/image";
 import back from "@/assets/back.svg";
 import down from "@/assets/down.svg";
 import more from "@/assets/more.svg";
-
+import instagram from '@/assets/icons/instagram.svg'
 interface Story {
   img: string;
   text: string;
@@ -230,12 +230,10 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
 
       <section className="flex items-center p-4 space-x-4">
         <div
-          className="w-20 h-20 bg-cover bg-center rounded-full border"
-          style={{
-            backgroundImage:
-              "url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/instagram-logo.png')",
-          }}
-        ></div>
+          className="w-20 h-20 rounded-full border flex items-center justify-center"
+        >
+           <Image src={instagram} alt="More"  className="rounded-full" />
+        </div>
         <div className="flex-grow flex justify-around text-center">
           <div>
             <p className="text-lg font-bold">6,126</p>
