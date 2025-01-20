@@ -3,7 +3,7 @@ import Image from "next/image";
 import iphone from "@/assets/phone.png";
 import InstagramProfile from "@/components/InstagramProfile";
 import FacebookProfile from "./FacebookProfile";
-import TwitterProfile from "./Twitter";
+import TwitterProfile from "./TwitterProfile";
 import TiktokProfile from "./TiktokProfile";
 
 interface MobileViewProps {
@@ -37,9 +37,9 @@ const MobileView: React.FC<MobileViewProps> = ({
           selectedCaption={selectedCaption}
         />
       )}
-      {platform === "facebook" && <FacebookProfile />}
-      {platform ==="twitter" && <TwitterProfile/>}
-      {platform==="tiktok" && <TiktokProfile/>}
+      {platform === "facebook" && <FacebookProfile  selectedBio={selectedBio}/>}
+      {platform ==="twitter" && <TwitterProfile selectedBio={selectedBio}/>}
+      {platform==="tiktok" && <TiktokProfile selectedBio={selectedBio} selectedCaption={selectedCaption}/>}
     </div>
   );
 };

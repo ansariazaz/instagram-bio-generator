@@ -9,10 +9,13 @@ import photo5 from "@/assets/images/photo5.jpeg";
 import more from "@/assets/more.svg";
 import back from "@/assets/back.svg";
 import notify from '@/assets/icons/notify.svg'
-import burger from '@/assets/icons/burger.svg'
-import people from '@/assets/icons/people.svg'
 import video from '@/assets/icons/video.svg'
-export default function TiktokProfile() {
+
+interface TiktokProfileProps {
+  selectedBio?:string,
+  selectedCaption?:string
+}
+const TiktokProfile: React.FC<TiktokProfileProps> =({selectedBio,selectedCaption})=> {
     interface BottomBarButton {
         icon: string;
         alt: string;
@@ -83,14 +86,14 @@ export default function TiktokProfile() {
           Follow
         </button>
         <p className="mt-3 text-center text-sm text-gray-700">
-          Marketing Tips | Portfolio Support 🎨 <br />
-          FLO'S PORTFOLIO TEMPLATES
+         {selectedBio ? selectedBio: "Marketing Tips | Portfolio Support 🎨"}  <br />
+         {selectedCaption ? selectedCaption:"FLO'S PORTFOLIO TEMPLATES"} 
         </p>
         <a
-          href="https://www.flo-create.co.uk/templates"
+          href="https://socialmediatalky.com/tools"
           className="text-blue-500 mt-2 text-sm"
         >
-          https://www.flo-create.co.uk/templates
+          https://socialmediatalky.com/tools
         </a>
       </div>
 
@@ -145,3 +148,4 @@ export default function TiktokProfile() {
     </div>
   );
 }
+export default TiktokProfile
