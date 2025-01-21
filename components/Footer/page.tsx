@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
   return (
     <div className="w-full">
       <footer className="bg-white border-t border-gray-200 py-10 shadow-sm mt-10">
-        <div className="container mx-auto flex flex-col md:flex-row justify-between md:items-center px-4">
+        <div className="container mx-auto flex flex-col md:flex-row justify-between px-4">
           {/* Logo Section */}
           <div className="mb-6 md:mb-0">
             <Link href="https://socialmediatalky.com/">
@@ -19,6 +19,7 @@ const Footer: React.FC = () => {
                 className="transition-transform duration-300 hover:scale-110"
               />
             </Link>
+            <p className="mt-6 w-2/3">AI-powered tools to level up your social media game</p>
           </div>
 
           {/* Tools Section */}

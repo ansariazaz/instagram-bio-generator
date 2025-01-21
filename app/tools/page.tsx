@@ -51,6 +51,13 @@ const toolsByCategory = {
       href: "/tools/tiktok-caption-generator",
     },
   ],
+  Others:[
+    {
+      name: "Tweet Generator",
+      description: "Generate Tweet effortlessly.",
+      href: "/tools/tweet-generator",
+    },
+  ]
 };
 
 export default function Home() {
