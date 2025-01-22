@@ -14,6 +14,7 @@ import {
   Share,
   BadgeCheck,
   Upload,
+  CircleX,
   RotateCcw,
 } from "lucide-react";
 import html2canvas from "html2canvas";
@@ -24,6 +25,9 @@ import verify from "@/assets/icons/varified.svg";
 export default function TweetGenerator() {
   const [theme, setTheme] = useState("light");
   const [mode, setMode] = useState<"edit" | "preview">("edit");
+  const [username, setUsername] = useState("Tweet Generator");
+  const [handle, setHandle] = useState("tweetgenerator");
+  const [avatarImage, setAvatarImage] = useState<string | null>(null);
   interface TweetContent {
     text: string;
     image: string | null;
@@ -34,6 +38,7 @@ export default function TweetGenerator() {
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const tweetCardRef = useRef<HTMLDivElement>(null);
+  const avatarInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (file: File) => {
     if (file && file.type.startsWith("image/")) {
@@ -49,8 +54,19 @@ export default function TweetGenerator() {
   };
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) handleImageUpload(file);
+    if (e.target.files?.length) {
+      const file = e.target.files[0];
+      handleImageUpload(file);
+      e.target.value = "";
+    }
+  };
+
+  const handleAvatarSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files?.length) {
+      const file = e.target.files[0];
+      handleAvatarUpload(file);
+      e.target.value = "";
+    }
   };
 
   const handleTextChange = (value: string) => {
@@ -96,7 +112,17 @@ export default function TweetGenerator() {
       }
     }
   }, [theme, mode]);
+  const handleAvatarUpload = (file: File) => {
+    if (file && file.type.startsWith("image/")) {
+      const url = URL.createObjectURL(file);
+      setAvatarImage(url);
+    }
+  };
 
+  const handleDelete = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+    setContent((prev) => ({ ...prev, image: "" }));
+  };
   return (
     <div
       className={`min-h-screen p-4 ${
@@ -136,16 +162,59 @@ export default function TweetGenerator() {
           ref={tweetCardRef}
         >
           <div className="flex gap-3">
-            <Avatar className="w-12 h-12">
-              <Image src={avatar} alt="Avatar" className="rounded-full" />
-            </Avatar>
+            <div className="flex gap-3">
+              <Avatar
+                className="w-12 h-12 cursor-pointer"
+                onClick={() => avatarInputRef.current?.click()}
+              >
+                {avatarImage ? (
+                  <Image
+                    src={avatarImage}
+                    width={100}
+                    height={100}
+                    alt="Avatar"
+                    className="rounded-full"
+                  />
+                ) : (
+                  <Image
+                    src={avatar}
+                    width={100}
+                    height={100}
+                    alt="Avatar"
+                    className="rounded-full"
+                  />
+                )}
+              </Avatar>
+              {mode === "edit" && (
+                <input
+                  type="file"
+                  ref={avatarInputRef}
+                  onChange={handleAvatarSelect}
+                  accept="image/*"
+                  className="hidden"
+                />
+              )}
+            </div>
             <div className="flex-1">
-              <div className="flex items-center gap-1 mb-0.5">
-                <span
-                  className={`font-bold ${theme === "dark" && "text-white"}`}
-                >
-                  Tweet Generator
-                </span>
+              <div className="flex items-center gap-1 h-6">
+                {mode === "edit" ? (
+                  <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    className={`font-bold bg-transparent border-none outline-none ${
+                      theme !== "light" ? "text-gray-300" : "text-black"
+                    }`}
+                  />
+                ) : (
+                  <span
+                    className={`font-bold ${
+                      theme !== "light" ? "text-gray-300" : "text-black"
+                    }`}
+                  >
+                    {username}
+                  </span>
+                )}
                 <Image
                   src={verify}
                   alt="verified"
@@ -155,11 +224,14 @@ export default function TweetGenerator() {
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="ml-auto"
+                    className={`ml-auto ${
+                      theme === "dark" && "hover:bg-black"
+                    }`}
                     onClick={handleReset}
                   >
-                    <RotateCcw className="w-4 h-4" />
-                    <span className="sr-only">Reset</span>
+                    <RotateCcw
+                      className={`w-4 h-4 ${theme === "dark" && "text-white"}`}
+                    />
                   </Button>
                 )}
               </div>
@@ -168,7 +240,25 @@ export default function TweetGenerator() {
                   theme !== "light" ? "text-gray-300" : "text-gray-500"
                 }`}
               >
-                @tweetgenerator
+                @
+                {mode === "edit" ? (
+                  <input
+                    type="text"
+                    value={handle}
+                    onChange={(e) => setHandle(e.target.value)}
+                    className={`bg-transparent border-none outline-none ${
+                      theme !== "light" ? "text-gray-300" : "text-gray-500"
+                    }`}
+                  />
+                ) : (
+                  <span
+                    className={`${
+                      theme !== "light" ? "text-gray-300" : "text-gray-500"
+                    }`}
+                  >
+                    {handle}
+                  </span>
+                )}
               </div>
             </div>
           </div>
@@ -184,39 +274,62 @@ export default function TweetGenerator() {
                 rows={6}
               />
             ) : (
-              <p className="whitespace-pre-wrap">{content.text}</p>
+              <p
+                className={`whitespace-pre-wrap ${
+                  theme !== "light" ? "bg-transparent text-white" : ""
+                }`}
+              >
+                {content.text}
+              </p>
             )}
 
-            <div
-              className="border-2 border-dashed rounded-lg mt-4 text-center cursor-pointer relative flex flex-col items-center justify-center min-h-40"
-              onDrop={handleDrop}
-              onDragOver={(e) => e.preventDefault()}
-              onClick={() => mode === "edit" && fileInputRef.current?.click()}
-            >
-              {content.image ? (
-                <img
-                  src={content.image || "/placeholder.svg"}
-                  alt="Uploaded"
-                  className="max-w-full h-auto"
+            {mode === "edit" || content.image ? (
+              <div
+                className={`${
+                  mode == "edit" && "border-2 border-dashed"
+                } rounded-lg mt-4 text-center cursor-pointer relative flex flex-col items-center justify-center min-h-40`}
+                onDrop={handleDrop}
+                onDragOver={(e) => e.preventDefault()}
+                onClick={() => mode === "edit" && fileInputRef.current?.click()}
+              >
+                {content.image && (
+                  <div className="relative">
+                    {mode === "edit" && (
+                      <Button
+                        variant="destructive"
+                        size="icon"
+                        className="absolute right-0"
+                        onClick={handleDelete}
+                      >
+                        <CircleX className="w-5 h-5" />
+                      </Button>
+                    )}
+                    <img
+                      src={content.image}
+                      alt="Uploaded"
+                      className="max-w-full h-auto rounded-sm"
+                    />
+                  </div>
+                )}
+                {mode === "edit" && !content.image && (
+                  <div
+                    className={`flex flex-col items-center gap-2 ${
+                      theme !== "light" ? "text-gray-300" : "text-gray-500"
+                    }`}
+                  >
+                    <Upload className="w-6 h-6" />
+                    <span>Drag and drop or click here to add image</span>
+                  </div>
+                )}
+                <input
+                  type="file"
+                  ref={fileInputRef}
+                  onChange={handleFileSelect}
+                  accept="image/*"
+                  className="hidden"
                 />
-              ) : (
-                <div
-                  className={`flex flex-col items-center gap-2 ${
-                    theme !== "light" ? "text-gray-300" : "text-gray-500"
-                  }`}
-                >
-                  <Upload className="w-6 h-6" />
-                  <span>Drag and drop or click here to add image</span>
-                </div>
-              )}
-              <input
-                type="file"
-                ref={fileInputRef}
-                onChange={handleFileSelect}
-                accept="image/*"
-                className="hidden"
-              />
-            </div>
+              </div>
+            ) : null}
 
             <div
               className={`text-sm mt-4 ${
@@ -284,7 +397,13 @@ export default function TweetGenerator() {
               </TabsList>
             </Tabs>
           </div>
-          <Button onClick={handleDownload} disabled={mode==="edit"}>Download</Button>
+          <Button
+            onClick={handleDownload}
+            disabled={mode === "edit"}
+            className={`${theme !== "light" ? "bg-gray-400" : "bg-black"}`}
+          >
+            Download
+          </Button>
         </div>
       </div>
     </div>
