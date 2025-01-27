@@ -38,6 +38,7 @@ export default function TweetGenerator() {
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const tweetCardRef = useRef<HTMLDivElement>(null);
+  const tweetIconRef = useRef<HTMLImageElement>(null); 
   const avatarInputRef = useRef<HTMLInputElement>(null);
 
   const handleImageUpload = (file: File) => {
@@ -81,7 +82,7 @@ export default function TweetGenerator() {
   };
 
   const [isDownloading, setIsDownloading] = useState(false);
-
+ 
   const handleDownload = useCallback(async () => {
     setIsDownloading(true);
     const previousMode = mode;
@@ -196,7 +197,7 @@ export default function TweetGenerator() {
               )}
             </div>
             <div className="flex-1">
-              <div className="flex items-center gap-1 h-6">
+              <div className="flex gap-1">
                 {mode === "edit" ? (
                   <input
                     type="text"
@@ -218,6 +219,7 @@ export default function TweetGenerator() {
                 <Image
                   src={verify}
                   alt="verified"
+                  ref={tweetIconRef}
                   className="w-4 h-4 text-blue-500"
                 />
                 {mode === "edit" && (
@@ -332,7 +334,7 @@ export default function TweetGenerator() {
             ) : null}
 
             <div
-              className={`text-sm mt-4 ${
+              className={`text-sm  py-4  ${
                 theme !== "light" ? "text-gray-300" : "text-gray-500"
               }`}
             >
@@ -376,14 +378,14 @@ export default function TweetGenerator() {
           </div>
         </Card>
 
-        <div className="flex justify-between items-center">
+        <div className="w-full flex justify-between items-center">
           <div className="flex items-center gap-2">
             <span
               className={`text-sm ${theme !== "light" ? "text-white" : ""}`}
             >
               Theme:
             </span>
-            <Tabs value={theme} onValueChange={setTheme} className="w-[300px]">
+            <Tabs value={theme} onValueChange={setTheme} className="max-w-[300px]">
               <TabsList>
                 <TabsTrigger value="light" className="flex-1">
                   Light
