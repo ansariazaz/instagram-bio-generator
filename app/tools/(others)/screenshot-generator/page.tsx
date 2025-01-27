@@ -20,7 +20,9 @@ interface GeneratorState {
   roundness: number;
   shadow: number;
   rotate: number;
+  border: number;
   frame: string;
+  borderColor: string;
   background: string;
 }
 
@@ -30,12 +32,16 @@ export default function ScreenshotGenerator() {
     roundness: 17,
     shadow: 9,
     rotate: 0,
+    border: 0,
+    borderColor: "#000000",
     frame: "arc",
     background: "gradient",
   });
   const [canvas, setCanvas] = useState({
     background: "gradient",
-  })
+    gradiant: null,
+    color: null,
+  });
   const [image, setImage] = useState<string | null>(null);
   const screenshotRef = useRef<HTMLDivElement>(null);
   const handleUpload = (file: File) => {
@@ -96,11 +102,9 @@ export default function ScreenshotGenerator() {
     { label: "Cyan", value: "cyan", colors: "bg-cyan-600" },
   ];
   const handleDownload = useCallback(async () => {
-
     await new Promise((resolve) => setTimeout(resolve, 100));
     if (screenshotRef.current) {
       try {
-        
         const canvas = await html2canvas(screenshotRef.current, {
           scale: 2,
           removeContainer: true,
@@ -111,8 +115,8 @@ export default function ScreenshotGenerator() {
         link.href = image;
         link.download = "tweet.png";
         link.click();
-      } catch(error){
-        console.log(error,"error")
+      } catch (error) {
+        console.log(error, "error");
       }
     }
   }, []);
@@ -156,18 +160,22 @@ export default function ScreenshotGenerator() {
                 : solidColors.find((c) => c.value === settings.color)?.colors
             }`}
           >
-            <div className="flex h-full items-center justify-center" >
+            <div className="flex h-full items-center justify-center">
               {image ? (
                 <div
                   className={`relative overflow-hidden ${
                     canvas.background === "gradient"
                       ? gradientOptions.find((g) => g.value === canvas.gradient)
                           ?.colors
-                      : solidColors.find((c) => c.value === canvas.color)?.colors
+                      : solidColors.find((c) => c.value === canvas.color)
+                          ?.colors
                   }`}
                   style={{
-                    transform: `rotate(${settings.rotate}deg) scale(${settings.size / 100})`,
+                    transform: `rotate(${settings.rotate}deg) scale(${
+                      settings.size / 100
+                    })`,
                     borderRadius: `${settings.roundness}px`,
+                    border: `${settings.border}px solid ${settings.borderColor}`,
                     boxShadow: `0 ${settings.shadow}px ${
                       settings.shadow * 2
                     }px rgba(0,0,0,0.1)`,
@@ -266,6 +274,36 @@ export default function ScreenshotGenerator() {
                   step={1}
                 />
               </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Border</label>
+                <Slider
+                  value={[settings.border]}
+                  onValueChange={([value]) =>
+                    setSettings({ ...settings, border: value })
+                  }
+                  min={0}
+                  max={50}
+                  step={1}
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-gray-700">
+                  Border Color:
+                </label>
+                <div className="flex items-center space-x-3">
+                  <input
+                    type="color"
+                    className="h-10 w-10 cursor-pointer"
+                    onChange={(e) =>
+                      setSettings({ ...settings, borderColor: e.target.value })
+                    }
+                    value={settings.borderColor}
+                  />
+                  <span className="text-sm px-2 py-1 bg-gray-100 text-gray-700 rounded-lg border border-gray-300 shadow-sm">
+                    {settings.borderColor}
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -273,73 +311,71 @@ export default function ScreenshotGenerator() {
           <div className="rounded-lg bg-white p-4 shadow-sm">
             <h2 className="mb-4 font-medium">Canvas Options</h2>
             <div className="space-y-4">
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Background</label>
-                  <Select
-                    value={canvas.background}
-                    onValueChange={(value) =>
-                      setCanvas({ ...canvas, background: value })
-                    }
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select background" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="gradient">Gradient</SelectItem>
-                      <SelectItem value="solid">Solid</SelectItem>
-                      <SelectItem value="transparent">Transparent</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                {canvas.background === "gradient" && (
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      Select Gradient
-                    </label>
-                    <div className="flex gap-4">
-                      {gradientOptions.map((option) => (
-                        <div
-                          key={option.value}
-                          className={`w-8 h-8 rounded-lg cursor-pointer ${
-                            option.colors
-                          } border-2 ${
-                            canvas.gradient === option.value
-                              ? "border-black"
-                              : "border-transparent"
-                          }`}
-                          onClick={() =>
-                            setCanvas({ ...canvas, gradient: option.value })
-                          }
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {canvas.background === "solid" && (
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium">Select Color</label>
-                    <div className="flex gap-4">
-                      {solidColors.map((option) => (
-                        <div
-                          key={option.value}
-                          className={`w-8 h-8 rounded-lg cursor-pointer ${
-                            option.colors
-                          } border-2 ${
-                            canvas.color === option.value
-                              ? "border-black"
-                              : "border-transparent"
-                          }`}
-                          onClick={() =>
-                            setCanvas({ ...canvas, color: option.value })
-                          }
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Background</label>
+                <Select
+                  value={canvas.background}
+                  onValueChange={(value) =>
+                    setCanvas({ ...canvas, background: value })
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select background" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="gradient">Gradient</SelectItem>
+                    <SelectItem value="solid">Solid</SelectItem>
+                    <SelectItem value="transparent">Transparent</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
+
+              {canvas.background === "gradient" && (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Select Gradient</label>
+                  <div className="flex gap-4">
+                    {gradientOptions.map((option) => (
+                      <div
+                        key={option.value}
+                        className={`w-8 h-8 rounded-lg cursor-pointer ${
+                          option.colors
+                        } border-2 ${
+                          canvas.gradient === option.value
+                            ? "border-black"
+                            : "border-transparent"
+                        }`}
+                        onClick={() =>
+                          setCanvas({ ...canvas, gradient: option.value })
+                        }
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {canvas.background === "solid" && (
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Select Color</label>
+                  <div className="flex gap-4">
+                    {solidColors.map((option) => (
+                      <div
+                        key={option.value}
+                        className={`w-8 h-8 rounded-lg cursor-pointer ${
+                          option.colors
+                        } border-2 ${
+                          canvas.color === option.value
+                            ? "border-black"
+                            : "border-transparent"
+                        }`}
+                        onClick={() =>
+                          setCanvas({ ...canvas, color: option.value })
+                        }
+                      />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
           <div className="rounded-lg bg-white p-4 shadow-sm">
             <h2 className="mb-4 font-medium">Frame Options</h2>
