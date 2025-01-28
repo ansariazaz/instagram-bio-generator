@@ -57,6 +57,11 @@ const toolsByCategory = {
       description: "Generate Tweet effortlessly.",
       href: "/tools/tweet-generator",
     },
+    {
+      name: "Screenshot Generator",
+      description: "Generate screenshot effortlessly.",
+      href: "/tools/screenshot-generator",
+    },
   ]
 };
 
