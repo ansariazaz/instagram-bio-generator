@@ -182,7 +182,7 @@ export default function ScreenshotGenerator() {
           {/* Preview Area */}
           <Card
             ref={screenshotRef}
-            style={{ width: 1000, height: 575 }}
+            style={{ width: 900, height: 540 }}
             className={`aspect-video ${
               settings.background === "gradient"
                 ? gradientOptions.find((g) => g.value === settings.gradient)
