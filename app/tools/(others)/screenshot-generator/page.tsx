@@ -28,7 +28,7 @@ interface GeneratorState {
 
 export default function ScreenshotGenerator() {
   const [settings, setSettings] = useState<GeneratorState>({
-    size: 50,
+    size: 100,
     roundness: 17,
     shadow: 9,
     rotate: 0,
@@ -101,25 +101,47 @@ export default function ScreenshotGenerator() {
     { label: "Orange", value: "orange", colors: "bg-orange-600" },
     { label: "Cyan", value: "cyan", colors: "bg-cyan-600" },
   ];
+  const [isLoading, setIsLoading] = useState(false);
+
   const handleDownload = useCallback(async () => {
-    await new Promise((resolve) => setTimeout(resolve, 100));
-    if (screenshotRef.current) {
-      try {
-        const canvas = await html2canvas(screenshotRef.current, {
-          scale: 2,
+    setIsLoading(true);
+    try {
+      await new Promise(resolve => setTimeout(resolve, 100));
+  
+      if (screenshotRef.current) {
+        // Wait for fonts to load
+        await document.fonts.ready;
+  
+        // Clone the element to capture a larger canvas
+        const screenshotElement = screenshotRef.current;
+        const originalWidth = screenshotElement.offsetWidth;
+        const originalHeight = screenshotElement.offsetHeight;
+        const scale = 2; // Adjust for higher resolution output
+  
+        const canvas = await html2canvas(screenshotElement, {
+          width: originalWidth,
+          height: originalHeight,
+          scale: scale, // Capture at higher resolution
           removeContainer: true,
         });
-
+  
         const image = canvas.toDataURL("image/png");
         const link = document.createElement("a");
         link.href = image;
-        link.download = "tweet.png";
+        link.download = `screenshot-${new Date().toISOString()}.png`;
         link.click();
-      } catch (error) {
-        console.log(error, "error");
       }
+    } catch (error) {
+      console.error("Screenshot failed:", error);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
+  
+  const handleRemove = ()=>{
+     setImage(null)
+     screenshotRef.current = null; 
+  }
   return (
     <div className="min-h-screen bg-gray-50 p-4">
       <div className="mx-auto max-w-6xl space-y-8">
@@ -139,12 +161,19 @@ export default function ScreenshotGenerator() {
             {/* <div className="text-sm text-muted-foreground">1616 × 1400 px</div> */}
           </div>
           <div className="flex items-center gap-2">
-            <Button variant="outline" size="sm">
-              Insert <ChevronDown className="ml-2 h-4 w-4" />
-            </Button>
-            <Button variant="outline" size="sm">
-              Save preset
-            </Button>
+            {image && (
+              <>
+                <Button variant="outline" size="sm" onClick={handleRemove}>
+                  Remove Image
+                </Button>
+                <div className="flex items-center justify-end gap-2">
+                  <Button variant="default" size="sm" onClick={handleDownload}>
+                    <Save className="mr-2 h-4 w-4" />
+                    {isLoading ? "Processing..." : "Download"}
+                  </Button>
+                </div>
+              </>
+            )}
           </div>
         </div>
 
@@ -153,6 +182,7 @@ export default function ScreenshotGenerator() {
           {/* Preview Area */}
           <Card
             ref={screenshotRef}
+            style={{ width: 1000, height: 575 }}
             className={`aspect-video ${
               settings.background === "gradient"
                 ? gradientOptions.find((g) => g.value === settings.gradient)
@@ -163,7 +193,7 @@ export default function ScreenshotGenerator() {
             <div className="flex h-full items-center justify-center">
               {image ? (
                 <div
-                  className={`relative overflow-hidden ${
+                  className={`${
                     canvas.background === "gradient"
                       ? gradientOptions.find((g) => g.value === canvas.gradient)
                           ?.colors
@@ -185,7 +215,7 @@ export default function ScreenshotGenerator() {
                     <img
                       src={image || "/placeholder.svg"}
                       alt="Preview"
-                      className="w-full h-full"
+                      className="object-cover"
                     />
                   </div>
                 </div>
@@ -230,8 +260,8 @@ export default function ScreenshotGenerator() {
                   onValueChange={([value]) =>
                     setSettings({ ...settings, size: value })
                   }
-                  min={40}
-                  max={80}
+                  min={50}
+                  max={100}
                   step={1}
                 />
               </div>
@@ -450,12 +480,6 @@ export default function ScreenshotGenerator() {
         </div>
 
         {/* Footer Actions */}
-        <div className="flex items-center justify-end gap-2">
-          <Button variant="default" size="sm" onClick={handleDownload}>
-            <Save className="mr-2 h-4 w-4" />
-            Save
-          </Button>
-        </div>
       </div>
     </div>
   );
