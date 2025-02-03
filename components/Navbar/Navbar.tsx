@@ -80,6 +80,7 @@ const Navbar = () => {
               title="Twitter" 
               items={[
                 { href: "/tools/twitter-bio-generator", label: "Twitter Bio Generator" },
+                { href: "/tools/tweet-generator", label: "Tweet Generator" }
               ]} 
             />
             <MobileNavItem 
@@ -200,7 +201,8 @@ const Navbar = () => {
                       {
                         href: "/tools/twitter-bio-generator",
                         label: "Twitter Bio Generator",
-                      }
+                      },
+                      { href: "/tools/tweet-generator", label: "Tweet Generator" }
                     ].map((tool) => (
                       <ListItem
                         key={tool.href}
