@@ -2,9 +2,9 @@ import React from 'react'
 import { Metadata } from "next";
 import InstagramCaption from '../../pages/instagram-caption/InstagramCaption';
 export const metadata: Metadata = {
-  title: "Free Instagram Caption Generator - Copy and Paste Caption Easily",
+  title: "Best Free Instagram Caption Generator | AI Caption Ideas",
   description:
-    "Create the perfect Instagram Caption with our free Instagram Caption generator. Discover unique ideas and easily copy and paste your Caption!",
+    "Generate the best Instagram captions with our FREE AI Instagram Caption Generator! No login required—get creative caption ideas instantly!",
   icons: {
     icon: ["/favicon.ico?v=4"],
   },
