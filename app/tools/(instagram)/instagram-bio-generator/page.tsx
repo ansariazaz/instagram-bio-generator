@@ -22,6 +22,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Card } from "@/components/ui/card";
+import { Metadata } from "next";
+export const metadata: Metadata = {
+  title: "Free Instagram Bio Generator - Copy and Paste Bios Easily",
+  description: "Create the perfect Instagram bio with our free Instagram bio generator. Discover unique ideas and easily copy and paste your bios!",
+  icons: {
+    icon: ["/favicon.ico?v=4"],
+  },
+};
 const page = () => {
   const [selectedGender, setSelectedGender] = useState<string>("girls");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -104,7 +112,7 @@ const page = () => {
         "Build a powerful personal brand on social media by showing your skills and experience clearly to attract employers and network with others.",
     },
   ];
-
+ 
   return (
     <>
       <Head>
