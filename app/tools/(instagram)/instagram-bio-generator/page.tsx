@@ -3,7 +3,6 @@ import { useState } from "react";
 import MobileView from "@/components/MobileView";
 import Loader from "@/components/Loader";
 import data from "@/data/bio/data.json";
-import Head from "next/head";
 import Image from "next/image";
 import ai from "@/assets/images/ai.png";
 import Feature from "@/components/Section/Feature";
@@ -104,16 +103,9 @@ const page = () => {
         "Build a powerful personal brand on social media by showing your skills and experience clearly to attract employers and network with others.",
     },
   ];
-
+ 
   return (
     <>
-      <Head>
-        <title>Free Instagram Bio Generator - Copy and Paste Bios Easily</title>
-        <meta
-          name="description"
-          content="Create the perfect Instagram bio with our free Instagram bio generator. Discover unique ideas and easily copy and paste your bios!"
-        />
-      </Head>
       <h1 className="text-4xl text-blue-600 text-center mt-10 font-bold max-w-3xl ml-auto mr-auto">
         Free Instagram Bio Generator: Copy and Paste Your Best Bio
       </h1>
