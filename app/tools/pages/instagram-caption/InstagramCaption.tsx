@@ -8,7 +8,12 @@ import checklist from "@/assets/icons/checklist.png";
 import preview from "@/assets/icons/preview.svg";
 import { useToast } from "@/hooks/use-toast";
 import copy from "@/assets/icons/copy.svg";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 const categories = {
   motivational: [
@@ -112,7 +117,7 @@ const InstagramCaption = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [selectedCaption, setSelectedCaption] = useState<string>("");
   const [category, setCategory] = useState<string>("");
-  const { toast } = useToast()
+  const { toast } = useToast();
   const generateCaptions = () => {
     if (!keyword.trim()) return;
     setLoading(true);
@@ -139,14 +144,12 @@ const InstagramCaption = () => {
     setSelectedCaption(caption);
   };
 
-  const handleCopyCaption = (
-    caption: string
-  ) => {
+  const handleCopyCaption = (caption: string) => {
     setSelectedCaption(caption);
     navigator.clipboard.writeText(caption);
     toast({
-      title: "Copied to clipboard!"
-    })
+      title: "Copied to clipboard!",
+    });
   };
 
   return (
@@ -207,43 +210,42 @@ const InstagramCaption = () => {
                     <li
                       key={index}
                       className="p-2 border rounded-lg bg-gray-50 cursor-pointer hover:bg-indigo-600 hover:text-white flex justify-between items-center"
-                      
                     >
                       <span>{caption}</span>
                       <div className="flex gap-2">
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <Image
-                                  alt="preview"
-                                  src={preview}
-                                  width={28}
-                                  height={28}
-                                  onClick={() => handleCaptionClick(caption)}
-                                  className="mr-4"
-                                />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Preview Name</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
-                          <TooltipProvider>
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <Image
-                                  src={copy}
-                                  alt="copy"
-                                  width={28}
-                                  height={28}
-                                  onClick={()=>handleCopyCaption(caption)}
-                                />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>Copy Name</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          </TooltipProvider>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <Image
+                                alt="preview"
+                                src={preview}
+                                width={28}
+                                height={28}
+                                onClick={() => handleCaptionClick(caption)}
+                                className="mr-4"
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Preview Name</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger>
+                              <Image
+                                src={copy}
+                                alt="copy"
+                                width={28}
+                                height={28}
+                                onClick={() => handleCopyCaption(caption)}
+                              />
+                            </TooltipTrigger>
+                            <TooltipContent>
+                              <p>Copy Name</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
                       </div>
                     </li>
                   ))}
@@ -251,26 +253,21 @@ const InstagramCaption = () => {
               </div>
             </div>
           ) : (
-            <Card className="mt-16">
-              <div className="text-center py-12 text-gray-500 flex flex-col justify-center items-center">
-                <Image
-                  src={checklist}
-                  alt="checklist"
-                  width={100}
-                  height={100}
-                />
-                <p className="text-xl font-medium mt-4">
-                  No caption generated yet
-                </p>
+            <Card className="mt-8">
+              <div className="text-center py-12 text-gray-500">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+                  <span className="text-2xl">📝</span>
+                </div>
+                <p className="text-xl font-medium">No captions generated yet</p>
                 <p className="mt-2 text-sm">
-                  Select options and click generate to see your caption
+                  Enter a keyword and select a category to get started
                 </p>
               </div>
             </Card>
           )}
         </div>
         <div className="w-full flex justify-center">
-          <MobileView selectedCaption={selectedCaption} platform="instagram" />
+          <MobileView selectedCaption={selectedCaption} platform="instagram" tool="caption" />
         </div>
       </div>
     </div>
