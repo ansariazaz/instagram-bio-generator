@@ -22,14 +22,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { Card } from "@/components/ui/card";
-import { Metadata } from "next";
-export const metadata: Metadata = {
-  title: "Free Instagram Bio Generator - Copy and Paste Bios Easily",
-  description: "Create the perfect Instagram bio with our free Instagram bio generator. Discover unique ideas and easily copy and paste your bios!",
-  icons: {
-    icon: ["/favicon.ico?v=4"],
-  },
-};
+import { NextSeo } from 'next-seo';
 const page = () => {
   const [selectedGender, setSelectedGender] = useState<string>("girls");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
@@ -115,13 +108,10 @@ const page = () => {
  
   return (
     <>
-      <Head>
-        <title>Free Instagram Bio Generator - Copy and Paste Bios Easily</title>
-        <meta
-          name="description"
-          content="Create the perfect Instagram bio with our free Instagram bio generator. Discover unique ideas and easily copy and paste your bios!"
-        />
-      </Head>
+      <NextSeo
+        title="Free Instagram Bio Generator - Copy and Paste Bios Easily"
+        description="Create the perfect Instagram bio with our free Instagram bio generator. Discover unique ideas and easily copy and paste your bios!"
+      />
       <h1 className="text-4xl text-blue-600 text-center mt-10 font-bold max-w-3xl ml-auto mr-auto">
         Free Instagram Bio Generator: Copy and Paste Your Best Bio
       </h1>
