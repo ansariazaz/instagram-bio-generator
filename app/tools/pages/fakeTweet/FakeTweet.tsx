@@ -126,16 +126,11 @@ export default function TweetGenerator() {
   };
   return (
     <div
-      className={`min-h-screen p-4 ${
-        theme === "dark"
-          ? "bg-gray-900 text-white"
-          : theme === "dim"
-          ? "bg-gray-800 text-gray-100"
-          : "bg-gray-50"
-      }`}
     >
+      <h1 className="text-4xl text-blue-600 text-center mt-4 font-bold max-w-3xl ml-auto mr-auto">Tweet Generator</h1>
+      <p className="text-2xl  text-center mt-2 max-w-3xl ml-auto mr-auto">Generate mock screenshots of tweets easily and for free.</p>
       <div className="max-w-xl mx-auto space-y-4">
-        <div className="flex justify-between items-center mb-4">
+        <div className="flex justify-between items-center my-4">
           <Tabs
             value={mode}
             onValueChange={(value: "edit" | "preview") => setMode(value)}
@@ -402,7 +397,6 @@ export default function TweetGenerator() {
           <Button
             onClick={handleDownload}
             disabled={mode === "edit"}
-            className={`${theme !== "light" ? "bg-gray-400" : "bg-black"}`}
           >
             Download
           </Button>
