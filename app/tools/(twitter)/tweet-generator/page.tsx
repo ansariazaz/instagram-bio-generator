@@ -2,7 +2,7 @@ import React from 'react'
 import TweetGenerator from '../../pages/fakeTweet/FakeTweet'
 import { Metadata } from "next";
 export const metadata: Metadata = {
-  title: "Realistic Fake Tweet Generator | SocialMediaTalkie",
+  title: "Fake Tweet Generator - Generate convincing fake tweet images",
   description:
     "Generate realistic fake tweets and export them as screenshots. Edit usernames, content, number of views, likes, retweets",
   icons: {
