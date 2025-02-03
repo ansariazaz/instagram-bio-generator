@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   icons: {
     icon: ["/favicon.ico?v=4"],
   },
+  alternates: {
+    canonical: "https://socialmediatalky.com/tools/instagram-bio-generator",
+}
 };
 const page = () => {
   return (
