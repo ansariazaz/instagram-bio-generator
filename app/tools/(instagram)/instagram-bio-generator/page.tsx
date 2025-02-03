@@ -3,7 +3,6 @@ import { useState } from "react";
 import MobileView from "@/components/MobileView";
 import Loader from "@/components/Loader";
 import data from "@/data/bio/data.json";
-import Head from "next/head";
 import Image from "next/image";
 import ai from "@/assets/images/ai.png";
 import Feature from "@/components/Section/Feature";
