@@ -3,7 +3,7 @@ import Image from "next/image";
 import back from "@/assets/back.svg";
 import down from "@/assets/down.svg";
 import more from "@/assets/more.svg";
-import instagram from '@/assets/icons/instagram.svg'
+import instagram from "@/assets/icons/instagram.svg";
 interface Story {
   img: string;
   text: string;
@@ -26,12 +26,19 @@ interface BottomBarButton {
 
 interface InstagramProfileProps {
   selectedBio?: string;
-  username?:string;
-  name?:string;
-  selectedCaption?:string
+  username?: string;
+  name?: string;
+  selectedCaption?: string;
+  tool?:string
 }
 
-const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,username, name, selectedCaption }) => {
+const InstagramProfile: React.FC<InstagramProfileProps> = ({
+  selectedBio,
+  username,
+  name,
+  selectedCaption,
+  tool
+}) => {
   const stories: Story[] = [
     {
       img: "https://images.unsplash.com/photo-1431512284068-4c4002298068?ixlib=rb-1.2.1&dpr=1&auto=format&fit=crop&w=416&h=312&q=60",
@@ -216,7 +223,9 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
       <section className="flex justify-between items-center pt-8 px-4 border-b mt-4">
         <Image src={back} alt="Back" className="w-6" />
         <div className="flex items-center">
-          <h1 className="text-lg font-bold">{username ? username : "Instagram"}</h1>
+          <h1 className="text-lg font-bold">
+            {username ? username : "Instagram"}
+          </h1>
           <Image
             src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/2053557/kisspng-social-media-instagram-verified-badge-symbol-compu-5b1eedb5aba638.1612204615287535897031.jpg"
             alt="verified"
@@ -228,11 +237,9 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
         <Image src={more} alt="More" className="w-6" />
       </section>
 
-      <section className="flex items-center p-4 space-x-4">
-        <div
-          className="w-20 h-20 rounded-full border flex items-center justify-center"
-        >
-           <Image src={instagram} alt="More"  className="rounded-full" />
+      <section className="flex items-center px-4 py-2 space-x-4">
+        <div className="w-20 h-20 rounded-full border flex items-center justify-center">
+          <Image src={instagram} alt="More" className="rounded-full" />
         </div>
         <div className="flex-grow flex justify-around text-center">
           <div>
@@ -250,7 +257,7 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
         </div>
       </section>
 
-      <section className="px-4 py-2">
+      <section className="px-4">
         <h2 className="text-lg font-semibold">{name ? name : "Instagram"}</h2>
         <p className="text-gray-600">{selectedBio}</p>
         <a
@@ -259,10 +266,9 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
         >
           www.socialmediatalky.com/tools
         </a>
-        <p>{selectedCaption && selectedCaption}</p>
       </section>
 
-      <section className="px-4 py-2 flex space-x-2">
+      <section className="px-4 flex space-x-2">
         <button className="flex-1 py-1 bg-blue-500 text-white rounded">
           Follow
         </button>
@@ -281,11 +287,44 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
           </div>
         ))}
       </section>
-
+     {tool ==="caption" && (
+       <section>
+         <div className="px-4">
+           <div className="flex items-center space-x-3 mb-2">
+             <div className="w-12 h-12 bg-gray-200 rounded-full"></div>
+             <div>
+               <div className="font-semibold">Your Username</div>
+               <div className="text-sm text-gray-500">Location</div>
+             </div>
+           </div>
+           <div className="w-full h-40 bg-gray-100 rounded-lg mb-2"></div>
+           <div>
+             <div className="flex space-x-4">
+               <div className="w-6 h-6 bg-gray-200 rounded-full"></div>
+               <div className="w-6 h-6 bg-gray-200 rounded-full"></div>
+               <div className="w-6 h-6 bg-gray-200 rounded-full"></div>
+             </div>
+             <div className="font-semibold">0 likes</div>
+             <div>
+               <span className="font-semibold">Username </span>
+               <span>
+               {selectedCaption ? selectedCaption:"Your caption will appear here"}
+               </span>
+             </div>
+           </div>
+         </div>
+     </section>
+     )}
       <section className="grid grid-cols-4 gap-1 border-t">
         {tabs.map((tab, idx) => (
           <button key={idx} className="p-2">
-            <Image src={tab.icon} alt={tab.alt} width={20} height={20} className="mx-auto" />
+            <Image
+              src={tab.icon}
+              alt={tab.alt}
+              width={20}
+              height={20}
+              className="mx-auto"
+            />
           </button>
         ))}
       </section>
@@ -293,11 +332,7 @@ const InstagramProfile: React.FC<InstagramProfileProps> = ({ selectedBio,usernam
       <section className="grid grid-cols-3 px-2 gap-[1px]">
         {galleryImages.map((image, index) => (
           <div key={index} className="relative w-full h-24">
-            <Image
-              src={image.img}
-              alt={image.alt}
-              layout="fill"
-            />
+            <Image src={image.img} alt={image.alt} layout="fill" />
           </div>
         ))}
       </section>

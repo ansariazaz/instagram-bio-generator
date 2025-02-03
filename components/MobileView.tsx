@@ -12,6 +12,7 @@ interface MobileViewProps {
   username?: string;
   name?: string;
   selectedCaption?: string;
+  tool?:string
 }
 
 const MobileView: React.FC<MobileViewProps> = ({
@@ -20,6 +21,7 @@ const MobileView: React.FC<MobileViewProps> = ({
   name,
   selectedCaption,
   platform,
+  tool
 }) => {
   return (
     <div className="phone-container">
@@ -34,6 +36,7 @@ const MobileView: React.FC<MobileViewProps> = ({
           selectedBio={selectedBio}
           username={username}
           name={name}
+          tool={tool}
           selectedCaption={selectedCaption}
         />
       )}
